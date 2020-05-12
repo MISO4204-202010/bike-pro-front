@@ -12,13 +12,12 @@ jobs:
             - v1-dependencies-
       - run: npm install
       - run: npm install --save-dev firebase-tools
-      - run: npm install angular-cli@latest -g
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: ng build --prod
-      - run: './node_modules/.bin/firebase deploy --only hosting:club --token=$FIREBASE_TOKEN'
+      - run: npm run build
+      - run: './node_modules/.bin/firebase deploy --only hosting --token=$FIREBASE_TOKEN'
 
 workflows:
   version: 2
