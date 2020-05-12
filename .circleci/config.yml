@@ -1,31 +1,23 @@
-version: 2
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
 jobs:
-  deployBase:
-    docker:
-      - image: circleci/node:12
-    working_directory: ~/repo
+  build-and-test:
+    executor:
+      name: node/default
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
-      - run: npm install
-      - run: npm install --save-dev firebase-tools
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run: npm run build
-      - run: './node_modules/.bin/firebase deploy --only hosting --token=$FIREBASE_TOKEN'
-
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run: npm install --save-dev firebase-tools
+            - run: npm run build
+            - run: './node_modules/.bin/firebase deploy --only hosting --token=$FIREBASE_TOKEN'
 workflows:
-  version: 2
-  building-and-deployment:
-    jobs:
-      - deployBase:
-          filters:
-            branches:
-              only:
-                - integracion-continua
-
+    build-and-test:
+      jobs:
+        - build-and-test:
+            filters:
+              branches:
+                only:
+                  - integracion-continua
