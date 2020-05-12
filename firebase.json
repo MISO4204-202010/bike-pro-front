@@ -1,7 +1,7 @@
 {
   "hosting": {
     "target": "social",
-    "public": "public",
+    "public": "dist/bike-pro-front",
     "ignore": [
       "firebase.json",
       "**/.*",
