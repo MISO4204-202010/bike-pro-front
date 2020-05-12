@@ -1,4 +1,4 @@
-# BikeProFront
+# BikeProFront Grupo 3
 
 Proyecto Fabricas. 
 
