@@ -18,3 +18,16 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm run prod-build
       - run: './node_modules/.bin/firebase deploy --only hosting:club --token=$FIREBASE_TOKEN'
+
+workflows:
+  version: 2
+  building-and-deployment:
+    jobs:
+      - deployBase:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - integracion-continua
+
