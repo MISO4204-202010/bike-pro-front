@@ -31,6 +31,11 @@ module.exports = function (config) {
     restartOnFileChange: true,
     browserDisconnectTolerance: 3,
     browserDisconnectTimeout: 60000,
-    browserNoActivityTimeout: 60000
+    browserNoActivityTimeout: 60000,
+    flags: [
+      '--disable-web-security',
+      '--disable-gpu',
+      '--no-sandbox'
+    ]
   });
 };

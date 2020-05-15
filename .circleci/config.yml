@@ -23,7 +23,7 @@ jobs:
           steps:
             - browser-tools/install-chrome
             - browser-tools/install-chromedriver
-            - run: npm run test
+            - run: npm run test-headless
 
   deploy-club:
     executor:
