@@ -12,6 +12,7 @@ jobs:
       - node/with-cache:
           steps:
             - run: npm install
+            - run: npm run test-headless
             - run: npm install --save-dev firebase-tools
 
   test:
@@ -59,9 +60,9 @@ workflows:
     building-and-deployment:
       jobs:
         - building
-        - test:
-            requires:
-              - building
+        # - test:
+        #     requires:
+        #       - building
         - deploy-club:
             requires:
               - building
