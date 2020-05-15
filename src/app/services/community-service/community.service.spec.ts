@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { CommunityService } from './community.service';
 
-describe('CommunityService', () => {
+xdescribe('CommunityService', () => {
   let service: CommunityService;
 
   beforeEach(() => {
