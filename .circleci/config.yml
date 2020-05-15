@@ -12,6 +12,15 @@ jobs:
             - run: npm install
             - run: npm install --save-dev firebase-tools
 
+  test:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+
   deploy-club:
     executor:
       name: node/default
@@ -46,6 +55,7 @@ workflows:
     building-and-deployment:
       jobs:
         - building
+        - test
         - deploy-club:
             requires:
               - building
