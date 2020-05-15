@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@1.1.6
 jobs:
-  build-and-test:
+  building:
     executor:
       name: node/default
     steps:
@@ -11,13 +11,59 @@ jobs:
           steps:
             - run: npm install
             - run: npm install --save-dev firebase-tools
-            - run: npm run build
-            - run: './node_modules/.bin/firebase deploy --only hosting --token=$FIREBASE_TOKEN'
+
+  deploy-club:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm run build:club
+            - run: './node_modules/.bin/firebase deploy --only hosting:club --token=$FIREBASE_TOKEN'
+
+  deploy-social:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm run build:social
+            - run: './node_modules/.bin/firebase deploy --only hosting:social --token=$FIREBASE_TOKEN'
+
+  deploy-rental:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm run build:rental
+            - run: './node_modules/.bin/firebase deploy --only hosting:rental --token=$FIREBASE_TOKEN'
+
 workflows:
-    build-and-test:
+    building-and-deployment:
       jobs:
-        - build-and-test:
+        - building
+        - deploy-club:
+            requires:
+              - building
             filters:
               branches:
                 only:
-                  - integracion-continua
+                  - deploy-product-club
+        - deploy-social:
+            requires:
+              - building
+            filters:
+              branches:
+                only:
+                  - deploy-product-social
+        - deploy-rental:
+            requires:
+              - building
+            filters:
+              branches:
+                only:
+                  - deploy-product-rental

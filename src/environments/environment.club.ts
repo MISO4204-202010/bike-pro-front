@@ -1,5 +1,4 @@
 import { Products } from '../app/enums/products.enum';
-import { truncate } from 'fs';
 export const environment = {
   production: true,
   product: Products.Clubes,
