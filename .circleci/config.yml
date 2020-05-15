@@ -1,6 +1,8 @@
 version: 2.1
 orbs:
   node: circleci/node@1.1.6
+  browser-tools: circleci/browser-tools@1.0.0
+
 jobs:
   building:
     executor:
@@ -11,6 +13,17 @@ jobs:
           steps:
             - run: npm install
             - run: npm install --save-dev firebase-tools
+
+  test:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - browser-tools/install-chrome
+            - browser-tools/install-chromedriver
+            - run: npm run test-headless
 
   deploy-club:
     executor:
@@ -46,23 +59,26 @@ workflows:
     building-and-deployment:
       jobs:
         - building
-        - deploy-club:
+        - test:
             requires:
               - building
+        - deploy-club:
+            requires:
+              - test
             filters:
               branches:
                 only:
                   - deploy-product-club
         - deploy-social:
             requires:
-              - building
+              - test
             filters:
               branches:
                 only:
                   - deploy-product-social
         - deploy-rental:
             requires:
-              - building
+              - test
             filters:
               branches:
                 only:

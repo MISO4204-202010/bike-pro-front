@@ -24,9 +24,18 @@ module.exports = function (config) {
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
-    browsers: ['Chrome'],
+    autoWatch: false,
+    browsers: ['ChromeHeadless'],
     singleRun: false,
-    restartOnFileChange: true
+    captureTimeout: 10000,
+    restartOnFileChange: true,
+    browserDisconnectTolerance: 3,
+    browserDisconnectTimeout: 10000,
+    browserNoActivityTimeout: 10000,
+    flags: [
+      '--disable-web-security',
+      '--disable-gpu',
+      '--no-sandbox'
+    ]
   });
 };
