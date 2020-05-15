@@ -55,7 +55,9 @@ workflows:
     building-and-deployment:
       jobs:
         - building
-        - test
+        - test:
+            requires:
+              - building
         - deploy-club:
             requires:
               - building
