@@ -5,6 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:club": "ng build -c club",
+    "build:rental": "ng build -c rental",
+    "build:social": "ng build -c social",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
