@@ -11,10 +11,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - browser-tools/install-chrome
-            - browser-tools/install-chromedriver
             - run: npm install
-            - run: npm run test-headless
             - run: npm install --save-dev firebase-tools
 
   test:
@@ -62,26 +59,26 @@ workflows:
     building-and-deployment:
       jobs:
         - building
-        # - test:
-        #     requires:
-        #       - building
-        - deploy-club:
+        - test:
             requires:
               - building
+        - deploy-club:
+            requires:
+              - test
             filters:
               branches:
                 only:
                   - deploy-product-club
         - deploy-social:
             requires:
-              - building
+              - test
             filters:
               branches:
                 only:
                   - deploy-product-social
         - deploy-rental:
             requires:
-              - building
+              - test
             filters:
               branches:
                 only:
