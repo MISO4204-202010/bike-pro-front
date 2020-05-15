@@ -26,7 +26,11 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: false,
-    restartOnFileChange: true
+    singleRun: true,
+    captureTimeout: 60000,
+    restartOnFileChange: true,
+    browserDisconnectTolerance: 3,
+    browserDisconnectTimeout: 60000,
+    browserNoActivityTimeout: 60000
   });
 };
