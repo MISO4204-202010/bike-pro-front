@@ -45,6 +45,7 @@ jobs:
 workflows:
     building-and-deployment:
       jobs:
+        - building
         - deploy-club:
             requires:
               - building
