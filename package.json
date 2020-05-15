@@ -9,7 +9,7 @@
     "build:rental": "ng build -c rental",
     "build:social": "ng build -c social",
     "test": "ng test",
-    "test-headless": "ng test --watch=false --browsers=ChromeHeadless",
+    "test-headless": "ng test --progress=false --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
