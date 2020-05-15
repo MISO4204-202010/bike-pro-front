@@ -19,7 +19,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+            - run: npm run test
 
   deploy-club:
     executor:
