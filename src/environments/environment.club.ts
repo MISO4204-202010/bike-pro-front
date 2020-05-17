@@ -10,12 +10,12 @@ export const environment = {
   busqueda_rutasCompartidas:   true,​
   busqueda_eventosPrivados:    true,
   // INSCRIPCION
-  inscripcion_registro:        true,
-  inscripcion_autenticacion:   true,
+  inscripcion_registro:        false,
+  inscripcion_autenticacion:   false,
   inscripcion_pagos:           false,
   // COMUNIDAD
   comunidad:                   true,
-  comunidad_compartirRuta:     false,
+  comunidad_compartirRuta:     true,
   comunidad_compartirEvento:   true,
   comunidad_muroPublicaciones: true,
 };
